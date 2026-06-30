@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>拼豆图纸生成器 | MARD 291</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <button id="homeNavBtn" class="topbar-brand" type="button">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="1" y="1" width="8" height="8" rx="2" fill="currentColor" opacity=".8"/><rect x="11" y="1" width="8" height="8" rx="2" fill="currentColor" opacity=".4"/><rect x="1" y="11" width="8" height="8" rx="2" fill="currentColor" opacity=".4"/><rect x="11" y="11" width="8" height="8" rx="2" fill="currentColor" opacity=".15"/></svg>
+        <span><strong>BEAD</strong> <em>CLUB</em></span>
+      </button>
+      <nav class="topbar-nav">
+        <button id="historyNavBtn" class="topbar-link" type="button">我的图纸</button>
+        <button id="guideNavBtn" class="topbar-link" type="button">使用说明</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="homeView" class="view">
+        <div class="home-hero">
+          <div class="home-hero-inner">
+            <p class="label hero-pill">MARD 291 · BEAD STUDIO</p>
+            <div class="hero-title-stack" aria-label="拼豆图纸生成器">
+              <span class="hero-title-line hero-title-accent">#PIXEL</span>
+              <span class="hero-title-line">BEAD</span>
+              <span class="hero-title-line hero-title-offset">PATTERN</span>
+            </div>
+            <p class="home-desc">上传图片，自动匹配 MARD 色号，生成可以打印制作的拼豆图纸，再用像素编辑器逐格精修。</p>
+            <div class="home-actions">
+              <button id="startWorkspaceBtn" class="btn btn-dark" type="button">开始生成</button>
+              <button id="scrollGuideBtn" class="btn btn-ghost" type="button">查看流程 ↓</button>
+            </div>
+            <p class="home-note">图片仅在浏览器本地处理，不会上传到任何服务器。</p>
+
+            <div class="hero-float-card hero-float-card-left" aria-hidden="true">
+              <div class="hero-card-art">
+                <img src="assets/home-card-question-original.png" alt="" />
+              </div>
+              <strong>29×29</strong>
+              <span>新手友好图纸</span>
+            </div>
+            <div class="hero-float-card hero-float-card-right" aria-hidden="true">
+              <div class="hero-card-art">
+                <img src="assets/home-card-flower-original.png" alt="" />
+              </div>
+              <strong>MARD 色板</strong>
+              <span>291 色自动匹配</span>
+            </div>
+            <svg class="hero-arrow hero-arrow-left" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <path d="M12 82 C 18 36 46 20 64 46 C 75 62 82 70 94 66" />
+              <path d="M80 52 L94 66 L82 80" />
+            </svg>
+            <svg class="hero-arrow hero-arrow-right" viewBox="0 0 100 100" fill="none" aria-hidden="true">
+              <path d="M88 12 C 78 58 54 80 36 58 C 18 36 42 18 62 30" />
+              <path d="M50 72 L36 58 L54 54" />
+            </svg>
+            <button id="heroBadgeBtn" class="hero-circle-badge" type="button" aria-label="开始生成拼豆图纸">
+              <span class="hero-circle-text">GET STARTED · MAKE BEADS ·</span>
+            </button>
+          </div>
+        </div>
+
+        <section id="homeRecent" class="home-recent">
+          <div class="home-recent-head">
+            <h2>最近图纸</h2>
+            <button id="viewAllPatternsBtn" type="button" class="btn btn-ghost btn-sm">查看更多 →</button>
+          </div>
+          <div id="recentPatternsRow" class="home-recent-row"></div>
+        </section>
+
+        <section id="guide" class="home-guide">
+          <h2>工作流程</h2>
+          <div class="guide-cards">
+            <div class="guide-card">
+              <span class="guide-num">1</span>
+              <h3>上传图片</h3>
+              <p>上传主体清晰、背景简单的图片。</p>
+            </div>
+            <div class="guide-card">
+              <span class="guide-num">2</span>
+              <h3>设置参数</h3>
+              <p>选择尺寸、颜色数和图纸效果。</p>
+            </div>
+            <div class="guide-card">
+              <span class="guide-num">3</span>
+              <h3>生成初稿</h3>
+              <p>自动匹配色号，生成拼豆图纸。</p>
+            </div>
+            <div class="guide-card">
+              <span class="guide-num">4</span>
+              <h3>手动调整</h3>
+              <p>用编辑器逐格精修细节。</p>
+            </div>
+            <div class="guide-card">
+              <span class="guide-num">5</span>
+              <h3>下载 PNG</h3>
+              <p>导出带行列号、色号和用料图例的完整图纸 PNG，可直接打印参照制作。</p>
+            </div>
+            <div class="guide-card">
+              <span class="guide-num">!</span>
+              <h3>重要说明</h3>
+              <p>MARD 291 色值来自社区整理数据，屏幕显示和实物豆子可能存在色差。</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section id="workspaceView" class="view" hidden>
+        <div class="ws">
+          <aside class="ws-sidebar">
+            <div class="ws-sidebar-head">
+              <h2>生成图纸</h2>
+              <p>上传图片 → 设置参数 → 点击生成</p>
+            </div>
+
+            <div class="ws-block ws-block-first ws-quick-start">
+              <button id="customDrawBtn" class="btn btn-ghost full" type="button">自定义绘图</button>
+            </div>
+
+            <div class="ws-block ws-block-upload">
+              <h3>上传图片</h3>
+              <label id="dropZone" class="upload-area" for="imageInput">
+                <input id="imageInput" type="file" accept="image/png,image/jpeg,image/webp" />
+                <span class="upload-icon">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                </span>
+                <span class="upload-label">点击或拖拽上传</span>
+                <span class="upload-hint">JPG / PNG / WebP · 最大 10 MB</span>
+              </label>
+              <div id="fileMeta" class="file-meta" hidden></div>
+              <div class="ws-actions ws-actions-inline">
+                <button id="generateBtn" class="btn btn-dark full" type="button" disabled>生成图纸</button>
+                <button id="resetBtn" class="btn btn-ghost full" type="button">重置</button>
+              </div>
+            </div>
+
+            <h3 class="ws-section-label">参数设置</h3>
+
+            <div class="ws-block">
+              <div class="range-head">
+                <h3>图纸宽度</h3>
+                <input id="widthInput" class="input input-sm range-value-input" type="number" min="8" max="200" value="29" step="1" aria-label="图纸宽度格数" />
+              </div>
+              <input id="widthSlider" class="range-input" type="range" min="8" max="200" value="29" step="1" />
+              <div class="range-scale"><span>粗</span><span>细</span></div>
+              <p class="range-hint">格数越多细节越多，制作时间也更长。常用 29 / 58。</p>
+            </div>
+
+            <div class="ws-block">
+              <h3>最大颜色数</h3>
+              <select id="colorLimit" class="input">
+                <option value="8">8 色</option>
+                <option value="16">16 色</option>
+                <option value="24">24 色</option>
+                <option value="32" selected>32 色（推荐）</option>
+                <option value="48">48 色</option>
+                <option value="64">64 色</option>
+                <option value="96">96 色</option>
+                <option value="0">无限制</option>
+              </select>
+            </div>
+
+            <div class="ws-block">
+              <div class="range-head">
+                <h3>颜色合并</h3>
+                <span id="colorMergeValue" class="range-value">0</span>
+              </div>
+              <input id="colorMergeLevel" class="range-input" type="range" min="0" max="100" value="0" step="1" />
+              <div class="range-scale"><span>少</span><span>多</span></div>
+              <p class="range-hint">数值越大，越会把相近色号合并成一种，适合减少头发、裙子等渐变杂色。</p>
+            </div>
+
+            <div class="ws-block">
+              <div class="range-head">
+                <h3>边缘强化</h3>
+                <span id="edgeEnhanceValue" class="range-value range-value-edge">0</span>
+              </div>
+              <input id="edgeEnhanceLevel" class="range-input range-input-edge" type="range" min="0" max="100" value="0" step="1" />
+              <div class="range-scale"><span>弱</span><span>强</span></div>
+              <p class="range-hint">增强轮廓与边界对比，让五官、线条在图纸里更清晰。0 为关闭。</p>
+            </div>
+
+            <div class="ws-block">
+              <h3>透明背景</h3>
+              <label class="radio-item"><input type="radio" name="alphaMode" value="keep" checked /> 保留透明</label>
+              <label class="radio-item"><input type="radio" name="alphaMode" value="white" /> 填充白色</label>
+              <label class="radio-item"><input type="radio" name="alphaMode" value="subject" /> 自动提取主体</label>
+              <div id="bgToleranceRow" class="bg-tolerance-row" hidden>
+                <div class="range-head">
+                  <h3>背景容差</h3>
+                  <span id="bgToleranceValue" class="range-value">35</span>
+                </div>
+                <input id="bgToleranceLevel" class="range-input" type="range" min="0" max="100" value="35" step="1" />
+                <div class="range-scale"><span>保守</span><span>强力</span></div>
+                <p class="range-hint">从图片四边识别连通背景并转为透明，适合主体清晰、背景相对独立的图片。</p>
+              </div>
+            </div>
+
+            <div class="ws-block ws-block-options">
+              <div class="ws-option-card">
+                <label class="ws-option">
+                  <input id="outlineEnabled" type="checkbox" />
+                  <span class="ws-option-body">
+                    <strong>外轮廓描边</strong>
+                    <small>在图案外侧自动加一圈描边，便于制作时辨认边界</small>
+                  </span>
+                </label>
+                <div id="outlineColorRow" class="outline-color-row" hidden>
+                  <label class="outline-color-label" for="outlineColorSelect">描边颜色</label>
+                  <select id="outlineColorSelect" class="input input-sm"></select>
+                </div>
+              </div>
+              <div class="ws-option-card">
+                <label class="ws-option">
+                  <input id="dither" type="checkbox" />
+                  <span class="ws-option-body">
+                    <strong>Floyd-Steinberg 抖动</strong>
+                    <small>照片类图片可开启，拼豆通常建议关闭</small>
+                  </span>
+                </label>
+              </div>
+            </div>
+
+          </aside>
+
+          <section class="ws-main">
+            <div id="statusMessage" class="status-bar">上传一张图片，生成你的第一张拼豆图纸。</div>
+
+            <div class="ws-cards">
+              <div class="card">
+                <div class="card-head">
+                  <h3>原图预览</h3>
+                  <div class="card-head-right">
+                    <span class="card-head-placeholder" aria-hidden="true"></span>
+                  </div>
+                </div>
+                <div class="card-body img-well">
+                  <img id="sourcePreview" alt="上传图片预览" hidden />
+                  <div id="sourceEmpty" class="preview-empty">
+                    <span class="preview-empty-icon" aria-hidden="true">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 17l-5.5-5.5a1.8 1.8 0 0 0-2.4 0L3 17"/></svg>
+                    </span>
+                    <p>尚未上传图片</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-head">
+                  <h3>图纸预览</h3>
+                  <div class="card-head-right">
+                    <span id="patternMeta" class="badge" hidden></span>
+                    <button id="editToggleBtn" class="btn btn-ghost btn-sm" type="button" disabled>进入编辑 →</button>
+                  </div>
+                </div>
+                <div class="card-body canvas-well">
+                  <canvas id="patternCanvas" hidden></canvas>
+                  <div id="patternEmpty" class="preview-empty">
+                    <span class="preview-empty-icon" aria-hidden="true">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><rect x="14" y="14" width="6" height="6"/></svg>
+                    </span>
+                    <p>生成后将在这里显示网格图纸</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head">
+                <h3>用料统计</h3>
+                <button id="downloadBtn" class="btn btn-dark btn-sm" type="button" disabled>下载 PNG</button>
+              </div>
+              <div id="summaryStats" class="stats-row">
+                <span>总尺寸：-</span>
+                <span>总豆数：-</span>
+                <span>颜色数：-</span>
+              </div>
+              <div class="table-scroll">
+                <table>
+                  <thead>
+                    <tr><th>颜色</th><th>色号</th><th>HEX</th><th>颗数</th><th>建议备料</th></tr>
+                  </thead>
+                  <tbody id="materialsTable">
+                    <tr><td colspan="5" class="empty">暂无统计</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section id="historyView" class="view" hidden>
+        <div class="history-page">
+          <button id="historyBackBtn" class="history-back btn btn-ghost btn-sm" type="button">← 返回首页</button>
+          <header class="history-head">
+            <div>
+              <h1>我的图纸</h1>
+              <p class="history-desc">已编辑的图纸保留 30 天；仅生成未进入编辑的保留 7 天。记录仅保存在本机浏览器。</p>
+            </div>
+            <button id="newProjectBtn" class="btn btn-dark" type="button">新建图纸</button>
+          </header>
+          <div id="historyList" class="history-list" hidden></div>
+          <p id="historyEmpty" class="history-empty">暂无图纸。生成或编辑后会自动出现在这里。</p>
+        </div>
+      </section>
+
+      <!-- ───── 全屏编辑器 ───── -->
+      <section id="editorView" class="view editor-view" hidden>
+        <header class="ed-topbar">
+          <button id="backToWorkspaceBtn" class="btn btn-ghost ed-topbar-back" type="button">
+            <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 3 5 8l5 5"/></svg>
+            <span>返回</span>
+          </button>
+
+          <div class="ed-topbar-main">
+            <div class="ed-tool-group" role="toolbar" aria-label="绘图工具">
+              <button type="button" class="tool-icon-btn active" data-tool="paint" title="画笔 B">
+                <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13 11.5 4.5l2 2L5 15H3v-2Z"/><path d="M9.5 3.5 12.5 6.5"/></svg>
+                <span>画笔</span>
+              </button>
+              <button type="button" class="tool-icon-btn" data-tool="eraser" title="橡皮 E">
+                <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m7 11 4-4 2.5-2.5 2 2L9 11H7Z"/><path d="M3 13h4"/></svg>
+                <span>橡皮</span>
+              </button>
+              <button type="button" class="tool-icon-btn" data-tool="picker" title="吸管 I">
+                <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12 9 7l3-3 2 2-5 5-2 1Z"/><circle cx="11.5" cy="4.5" r="1"/></svg>
+                <span>吸管</span>
+              </button>
+              <button type="button" class="tool-icon-btn" data-tool="fill" title="填充 F">
+                <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 13c3-4 7-8 10-10 1 3-3 7-10 10Z"/></svg>
+                <span>填充</span>
+              </button>
+              <button type="button" class="tool-icon-btn" data-tool="select" title="框选 S">
+                <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="10" height="10" stroke-dasharray="2 2"/></svg>
+                <span>框选</span>
+              </button>
+            </div>
+
+            <span class="ed-topbar-sep" aria-hidden="true"></span>
+
+            <button id="undoBtn" type="button" class="tool-icon-btn" title="撤销 Ctrl+Z" disabled>
+              <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h7a3 3 0 1 1 0 6H7"/><path d="M6 4 3 7l3 3"/></svg>
+              <span>撤销</span>
+            </button>
+            <button id="redoBtn" type="button" class="tool-icon-btn" title="重做" disabled>
+              <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 7H6a3 3 0 1 0 0 6h3"/><path d="M10 4l3 3-3 3"/></svg>
+              <span>重做</span>
+            </button>
+
+            <span class="ed-topbar-sep" aria-hidden="true"></span>
+
+            <label class="ed-topbar-item"><input id="showCodes" type="checkbox" checked /> 色号</label>
+            <label class="ed-topbar-item"><input id="showGrid" type="checkbox" checked /> 网格</label>
+            <label class="ed-topbar-item"><input id="showSourceUnderlay" type="checkbox" /> 原图</label>
+            <label class="ed-topbar-item"><input id="showPixels" type="checkbox" checked /> 像素</label>
+
+            <span class="ed-topbar-sep" aria-hidden="true"></span>
+
+            <div class="ed-popover-wrap">
+              <button id="canvasResizeBtn" type="button" class="tool-icon-btn" title="调整画布尺寸">
+                <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 6V2h4M10 2h4v4M14 10v4h-4M6 14H2v-4"/></svg>
+                <span>画布</span>
+              </button>
+              <div id="canvasResizePanel" class="ed-popover" hidden>
+                <p class="popover-title">调整画布尺寸（格）</p>
+                <div class="popover-row">
+                  <label>宽 <input id="resizeWidthInput" class="input input-sm" type="number" min="8" max="200" /></label>
+                  <label>高 <input id="resizeHeightInput" class="input input-sm" type="number" min="8" max="200" /></label>
+                </div>
+                <label class="popover-label">原图位置</label>
+                <select id="resizeAnchorSelect" class="input input-sm">
+                  <option value="center">居中</option>
+                  <option value="top-left">左上</option>
+                  <option value="top-right">右上</option>
+                  <option value="bottom-left">左下</option>
+                  <option value="bottom-right">右下</option>
+                </select>
+                <button id="applyResizeBtn" type="button" class="btn btn-dark full btn-sm">应用</button>
+              </div>
+            </div>
+
+            <div class="ed-popover-wrap">
+              <button id="toggleMergePanelBtn" type="button" class="tool-icon-btn" title="颜色合并">
+                <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="6" cy="6" r="3"/><circle cx="11" cy="11" r="3"/></svg>
+                <span>合并</span>
+              </button>
+              <div id="mergePanel" class="ed-popover ed-popover-wide" hidden>
+                <p class="popover-title">颜色合并</p>
+                <p class="merge-desc">先点按钮，再点击色板或图纸选色。</p>
+                <button id="mergeFromPick" type="button" class="merge-pick full" disabled>
+                  <span class="merge-pick-label">被合并色号</span>
+                  <span id="mergeFromDisplay" class="merge-pick-display">点击选择</span>
+                </button>
+                <button id="mergeToPick" type="button" class="merge-pick full" disabled>
+                  <span class="merge-pick-label">合并为</span>
+                  <span id="mergeToDisplay" class="merge-pick-display">点击选择</span>
+                </button>
+                <p id="mergeHint" class="merge-hint">生成图纸后可合并颜色</p>
+                <button id="mergeColorsBtn" class="btn btn-dark full btn-sm" type="button" disabled>合并颜色</button>
+              </div>
+            </div>
+
+            <button id="applySelectionBtn" type="button" class="tool-icon-btn" title="框选改色" disabled>
+              <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="12" height="12" rx="1"/><path d="M5 8h6M8 5v6"/></svg>
+              <span>框选改色</span>
+            </button>
+            <button id="clearSelectionBtn" type="button" class="tool-icon-btn" title="清空框选" disabled>
+              <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="10" height="10" rx="1" stroke-dasharray="2 2"/><path d="M6 6l4 4M10 6l-4 4"/></svg>
+              <span>清空框选</span>
+            </button>
+            <button id="clearColorBtn" type="button" class="tool-icon-btn" title="清除当前选择的颜色">
+              <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 12.5 9.5 6l2.5 2.5L7.5 13H4l-1-1Z"/><path d="M8.5 7 6 4.5 7.5 3 14 9.5 12.5 11 10 8.5"/><path d="M11.5 3.5 13 2M13 5h1.5M10 2v1.5"/></svg>
+              <span>清颜色</span>
+            </button>
+            <button id="clearTinyBtn" type="button" class="tool-icon-btn" title="清理小色块">
+              <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="9" width="3" height="3"/><rect x="6.5" y="6" width="3" height="3"/><rect x="11" y="3" width="3" height="3"/><path d="M3 13h10"/><path d="M11 11l2 2"/></svg>
+              <span>清理</span>
+            </button>
+
+            <button id="editorDownloadBtn" type="button" class="tool-icon-btn tool-icon-btn-primary" title="下载 PNG">
+              <svg class="icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 2v9M5 8l3 3 3-3"/><path d="M3 13h10"/></svg>
+              <span>下载</span>
+            </button>
+          </div>
+        </header>
+
+        <div id="edMain" class="ed-main">
+          <div class="ed-canvas-wrap">
+            <aside id="edPaletteFloat" class="ed-palette-float">
+              <div class="ed-palette-float-head">
+                <span class="ed-palette-float-title">色板</span>
+                <button id="togglePaletteBtn" type="button" class="ed-palette-toggle">隐藏</button>
+              </div>
+              <div id="edPalettePanel" class="ed-palette-panel">
+                <div id="edPaletteControls" class="ed-palette-controls">
+                  <select id="colorMode" class="input input-sm">
+                    <option value="used">仅已用颜色</option>
+                    <option value="all">完整 MARD 色板</option>
+                  </select>
+                  <input id="colorSearch" class="input input-sm" type="search" placeholder="搜索色号…" />
+                </div>
+                <div id="colorPalette" class="ed-palette-grid"></div>
+              </div>
+            </aside>
+
+            <button id="paletteShowTab" type="button" class="ed-palette-tab" hidden>显示色板</button>
+
+            <div id="editorCanvasBody" class="ed-canvas-body">
+              <canvas id="editorCanvas" hidden></canvas>
+              <p id="editorEmpty" class="empty">请先在工作台生成图纸</p>
+            </div>
+
+            <div id="sourcePreviewFloat" class="ed-source-float" hidden>
+              <div class="ed-source-head">
+                <span>原图</span>
+                <button id="sourcePreviewZoomBtn" type="button" class="btn btn-ghost btn-sm">放大</button>
+              </div>
+              <img id="editorSourcePreview" alt="原图预览" />
+            </div>
+
+            <div class="ed-canvas-foot">
+              <span id="hoverInfo" class="ed-hover-float">悬停格子查看坐标</span>
+              <label class="ed-zoom-float">
+                <span>缩放</span>
+                <select id="zoomSelect" class="input input-sm">
+                  <option value="fit" selected>适应</option>
+                  <option value="0.5">50%</option>
+                  <option value="0.75">75%</option>
+                  <option value="1">100%</option>
+                  <option value="1.5">150%</option>
+                  <option value="2">200%</option>
+                  <option value="3">300%</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div id="sourcePreviewModal" class="ed-source-modal" hidden>
+          <div class="ed-source-modal-backdrop" data-close-modal></div>
+          <div class="ed-source-modal-card">
+            <div class="ed-source-modal-head">
+              <strong>原图预览</strong>
+              <div class="ed-source-modal-actions">
+                <button id="sourceZoomOutBtn" type="button" class="btn btn-ghost btn-sm">缩小</button>
+                <span id="sourceZoomLabel">100%</span>
+                <button id="sourceZoomInBtn" type="button" class="btn btn-ghost btn-sm">放大</button>
+                <button id="closeSourceModalBtn" type="button" class="btn btn-ghost btn-sm">关闭</button>
+              </div>
+            </div>
+            <div id="sourceModalViewport" class="ed-source-modal-viewport">
+              <img id="editorSourcePreviewLarge" alt="原图放大预览" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer id="siteFooter" class="footer">
+      <span>拼豆图纸生成器</span>
+      <span>图片仅在浏览器中处理 · MARD 291 色板</span>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
